@@ -13,8 +13,8 @@ echo -e "${RED}▒ ▒▓▒ ▒ ░░░ ▒░ ░ ▒ ░░   ░▒▓▒ 
 echo -e "${RED}░ ░▒  ░ ░ ░ ░  ░   ░    ░░▒░ ░ ░ ░▒ ░     " 
 echo -e "${RED}░  ░  ░     ░    ░      ░░░ ░ ░ ░░        " 
 echo -e "${RED}     ░     ░  ░         ░            ${ENDCOLOR}   " 
-                                          
-echo ""                                         
+       
+echo ""    
 echo -e "\e[1;34m[*] \e[32mInstalling Requirements\e[0m"   
 
 # Clean old ruby gems to prevent conflicts
@@ -27,9 +27,9 @@ pkg upgrade -y -o Dpkg::Options::="--force-confnew"
 echo "*** Installing binutils and dependencies..."
 
 pkg install -y binutils python git autoconf bison clang coreutils curl findutils \
-apr apr-util postgresql openssl readline libffi libgmp libpcap libsqlite libgrpc \
-libtool libxml2 libxslt ncurses make ncurses-utils wget unzip zip tar termux-tools \
-termux-elf-cleaner pkg-config ruby libyaml espeak nodejs -o Dpkg::Options::="--force-confnew"
+openssl readline libffi libgmp libpcap libsqlite libxml2 libxslt ncurses make \
+ncurses-utils wget unzip zip tar termux-tools termux-elf-cleaner pkg-config ruby \
+libyaml espeak nodejs redis -o Dpkg::Options::"--force-confnew"
 
 # Upgrade pip and install requests
 python3 -m pip install --upgrade pip
