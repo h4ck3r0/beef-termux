@@ -141,7 +141,6 @@ This repository is provided as-is for educational purposes. BeEF itself is licen
 For issues specific to this Termux guide, open an issue on this repository.
 
 For BeEF-specific issues, visit the [BeEF GitHub repository](https://github.com/beefproject/beef).
-
 ---
 
 **Disclaimer:** This tool should only be used for authorized security testing and educational purposes. Unauthorized access or use is illegal.
