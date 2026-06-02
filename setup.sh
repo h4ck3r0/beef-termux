@@ -16,7 +16,6 @@ echo -e "${RED}     ░     ░  ░         ░            ${ENDCOLOR}   "
        
 echo ""    
 echo -e "\e[1;34m[*] \e[32mInstalling Requirements\e[0m"   
-pkg update && pkg upgrade -y
 # Clean old ruby gems to prevent conflicts
 apt purge ruby -y
 rm -fr $PREFIX/lib/ruby/gems
