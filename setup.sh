@@ -56,3 +56,8 @@ sed -i 's/sudo //g' install
 bash install
 
 echo -e "\e[1;34m[*] \e[32mSetup Complete.\e[0m"
+
+
+cd $HOME/beef
+./beef
+
