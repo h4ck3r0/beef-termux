@@ -79,10 +79,7 @@ install_termux() {
 	pkg upgrade -y
 
 	info "Installing required packages..."
-	pkg install -y curl ruby git build-essential openssl readline zlib libyaml sqlite libxml2 libxslt ncurses automake libtool bison nodejs libcurl
-	gem install bundler 
-	gem update --system
-
+	pkg install -y curl git build-essential openssl readline zlib libyaml sqlite libxml2 libxslt ncurses automake libtool bison nodejs libcurl
 }
 
 
@@ -176,7 +173,7 @@ finish() {
 	echo
 	echo "* Change the default password in config.yaml"
 	echo "* Configure geoipupdate to update the Maxmind GeoIP database:"
-	echo "*   https://dev.maxmind.com/geoip/updating-databases"
+	echo "*   https://dev.maxmind.com/字节/geoip/updating-databases"
 	echo "* Review the wiki for important configuration information:"
 	echo "  https://github.com/beefproject/beef/wiki/Configuration"
 	echo
@@ -193,6 +190,10 @@ main() {
 		echo
 	fi
 
+	echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
+	echo "                   -- [ BeEF Installer ] --                      "
+	echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
+	echo
 
 	if [ -n "${GITACTIONS:-}" ]; then
 		info "Skipping: Running on Github Actions"
