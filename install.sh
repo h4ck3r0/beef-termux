@@ -79,15 +79,12 @@ install_termux() {
 	pkg upgrade -y
 
 	info "Installing required packages..."
-	pkg install -y curl git build-essential openssl libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libc6-dev libncurses5-dev automake libtool bison nodejs libcurl4-openssl-dev
+	pkg install -y curl ruby git build-essential openssl readline zlib libyaml sqlite libxml2 libxslt ncurses automake libtool bison nodejs libcurl
+	gem install bundler 
+	gem update --system
 
-	if command_exists rvm || command_exists rbenv; then
-		info "Ruby package Manager exists - Ruby install skipped"
-	else
-		info "No Ruby package manager detected - will install Ruby"
-		pkg install -y ruby-dev
-	fi
 }
+
 
 install_openbsd() {
 
