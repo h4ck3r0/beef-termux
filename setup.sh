@@ -25,7 +25,7 @@ pkg upgrade -y -o Dpkg::Options::="--force-confnew"
 
 echo "*** Installing binutils and dependencies..."
 
-pkg install -y binutils python git autoconf bison clang coreutils curl findutils \
+pkg install -y ruby binutils python git autoconf bison clang coreutils curl findutils \
 openssl readline libffi libgmp libpcap libsqlite libxml2 libxslt ncurses make \
 ncurses-utils wget unzip zip tar termux-tools termux-elf-cleaner pkg-config ruby \
 libyaml espeak nodejs redis -o Dpkg::Options::"--force-confnew"
