@@ -17,64 +17,33 @@ fatal() {
 	exit 1
 }
 
-RUBYSUFFIX=''
-
 command_exists() {
-
 	command -v "${1}" >/dev/null 2>&1
 }
 
 get_permission() {
-
 	warn 'This script will install BeEF and its required dependencies (including operating system packages).'
-
 	read -rp "Are you sure you wish to continue (Y/n)? "
 	if [ "$(echo "${REPLY}" | tr "[:upper:]" "[:lower:]")" = "n" ]; then
 		fatal 'Installation aborted'
 	fi
-
 }
 
 check_os() {
-
 	info "Detecting OS..."
-
 	OS=$(uname)
 	readonly OS
 	info "Operating System: $OS"
 	if [ "${OS}" = "Linux" ]; then
 		info "Launching Linux install..."
 		install_termux
-	elif [ "${OS}" = "Darwin" ]; then
-		info "Launching Mac OSX install..."
-		install_mac
-	elif [ "${OS}" = "FreeBSD" ]; then
-		info "Launching FreeBSD install..."
-		for SUFX in 32 31 30; do
-			if command_exists ruby${SUFX}; then
-				RUBYSUFFIX=${SUFX}
-				break
-			fi
-		done
-		install_freebsd
-	elif [ "${OS}" = "OpenBSD" ]; then
-		info "Launching OpenBSD install..."
-		for SUFX in 32 31 30; do
-			if command_exists ruby${SUFX}; then
-				RUBYSUFFIX=${SUFX}
-				break
-			fi
-		done
-		install_openbsd
 	else
 		fatal "Unable to locate installer for your operating system: ${OS}"
 	fi
 }
 
 install_termux() {
-
 	info "Installing Termux prerequisites..."
-
 	pkg update
 	pkg upgrade -y
 
@@ -82,47 +51,8 @@ install_termux() {
 	pkg install -y curl git build-essential openssl readline zlib libyaml sqlite libxml2 libxslt ncurses automake libtool bison nodejs libcurl
 }
 
-
-install_openbsd() {
-
-	pkg_add curl git libyaml libxml libxslt bison node ruby${RUBYSUFFIX}-bundler lame espeak
-}
-
-install_freebsd() {
-
-	pkg install curl git libyaml libxslt devel/ruby-gems bison node espeak
-}
-
-install_mac() {
-
-	local mac_deps=(curl git nodejs python3
-		openssl readline libyaml sqlite3 libxml2
-		autoconf ncurses automake libtool
-		bison wget)
-
-	if ! command_exists brew; then
-		fatal "Homebrew (https://brew.sh/) required to install dependencies"
-	fi
-
-	info "Installing dependencies via brew"
-
-	brew update
-
-	for package in "${mac_deps[@]}"; do
-
-		if brew install "${package}"; then
-			info "${package} installed"
-		else
-			fatal "Failed to install ${package}"
-		fi
-
-	done
-}
-
 check_ruby_version() {
-
 	info 'Detecting Ruby environment...'
-
 	MIN_RUBY_VER='3.0'
 	if command_exists ruby; then
 		RUBY_VERSION=$(ruby -e "puts RUBY_VERSION")
@@ -136,9 +66,7 @@ check_ruby_version() {
 }
 
 check_bundler() {
-
 	info 'Detecting bundler gem...'
-
 	if command_exists bundler; then
 		info "bundler gem is installed"
 	else
@@ -148,13 +76,10 @@ check_bundler() {
 }
 
 install_beef() {
-
 	echo "Installing required Ruby gems..."
-
 	if [ -w Gemfile.lock ]; then
 		/bin/rm Gemfile.lock
 	fi
-
 	if command_exists bundle; then
 		bundle install
 	else
@@ -173,7 +98,7 @@ finish() {
 	echo
 	echo "* Change the default password in config.yaml"
 	echo "* Configure geoipupdate to update the Maxmind GeoIP database:"
-	echo "*   https://dev.maxmind.com/字节/geoip/updating-databases"
+	echo "*   https://dev.maxmind.com/bytes/geoip/updating-databases"
 	echo "* Review the wiki for important configuration information:"
 	echo "  https://github.com/beefproject/beef/wiki/Configuration"
 	echo
@@ -182,7 +107,6 @@ finish() {
 }
 
 main() {
-
 	clear
 
 	if [ -f core/main/console/beef.ascii ]; then
